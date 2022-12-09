@@ -1,0 +1,25 @@
+name: Adding APP to ArgoCD 
+
+on:
+  push:
+    branches:
+      - CICD
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Checkout  
+      uses: action/checkout@v3
+
+  build:
+    uses: gallitnet/CICD-next/.github/workflows/main.yml@main
+    with:
+      project: ${{ github.event.repository.name }}
+    secrets: 
+      cluster_name: ${{ secrets.CLUSTER_NAME }}
+      git_token: ${{ secrets.GIT_TOKEN }}
+      projectid: ${{ secrets.PROJECT_ID }}
+      git_user: ${{ secrets.GIT_USER}}
+      sacreds: ${{ secrets.SA_CREDENTIALS }}
+      owner: ${{ secrets.OWNER }}
