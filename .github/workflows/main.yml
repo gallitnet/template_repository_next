@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
     - name: Checkout  
-      uses: action/checkout@v3
+      uses: actions/checkout@v3
 
   build:
     uses: gallitnet/CICD-next/.github/workflows/main.yml@main
