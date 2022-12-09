@@ -22,3 +22,4 @@ jobs:
       git_user: ${{ secrets.GIT_USER}}
       sacreds: ${{ secrets.SA_CREDENTIALS }}
       owner: ${{ secrets.OWNER }}
+      address: ${{secrets.IP_ADDRESS }}
