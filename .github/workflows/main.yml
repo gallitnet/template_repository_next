@@ -1,5 +1,4 @@
 name: Adding APP to ArgoCD 
-
 on:
   push:
     branches:
