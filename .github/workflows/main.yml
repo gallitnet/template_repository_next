@@ -1,0 +1,53 @@
+name: Building stage-nextjs  app image
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - stage
+      - prod
+      - dev
+
+
+jobs:
+  Push_image:
+    runs-on: ubuntu-latest
+    name: Build and Push Next app image
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: nelonoel/branch-name@v1.0.1
+      - name: Import variables 
+        uses: ./.github/actions/get-variables
+        with:
+          envfilepath: ./variables/.env
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "package.json"
+      - id: 'auth'
+        if: steps.check_files.outputs.files_exists == 'true'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.SA_CREDENTIALS }}
+      - name: Setup SDK 
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: google-github-actions/setup-gcloud@main 
+        with:
+          project_id: ${{ secrets.projectid }}
+          export_default_credentials: true 
+      - name: Setup docker 
+        run: gcloud auth configure-docker --quiet
+      - name: Build docker image 
+        if: steps.check_files.outputs.files_exists == 'true'
+        working-directory: ./
+        run: docker build . -t gcr.io/${{ secrets.PROJECT_ID }}/${{ github.event.repository.name }}:${BRANCH_NAME}-${{ env.imagetag }}
+      - name: Push image to remote repo 
+        if: steps.check_files.outputs.files_exists == 'true'
+        working-directory: ./
+        run: docker push gcr.io/${{ secrets.PROJECT_ID }}/${{ github.event.repository.name }}:${BRANCH_NAME}-${{ env.imagetag }}
+  
+        
