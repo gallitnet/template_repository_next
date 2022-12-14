@@ -15,7 +15,8 @@ jobs:
     uses: gallitnet/CICD-next/.github/workflows/main.yml@main
     with:
       project: ${{ github.event.repository.name }}
-    secrets: 
+    secrets:
+      sacreds: ${{ secrets.SA_CREDENTIALS }}
       git_token: ${{ secrets.GIT_TOKEN }}
       projectid: ${{ secrets.PROJECT_ID }}
       git_user: ${{ secrets.GIT_USER}}
