@@ -21,9 +21,9 @@ jobs:
         with:
           envfilepath: ./variables/.env
       - name: Create branches 
-        run: git checkout smietnik && git push origin smietnik 
+        run: git checkout -b smietnik && git push origin smietnik 
       - name: Create branches 
-        run: git checkout szajs && git push origin szajs
+        run: git checkout -b szajs && git push origin szajs
         
       - name: Check file existence
         id: check_files
