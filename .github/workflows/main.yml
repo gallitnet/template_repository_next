@@ -28,11 +28,8 @@ jobs:
 
       - name: Create branches
         if: steps.check_files.outputs.files_exists == 'false'
-        run: git checkout -b stage && git push origin stage 
+        run: git checkout -b stage &&  git checkout -b prod && git push origin stage prod
 
-      - name: Create branches 
-        if: steps.check_files.outputs.files_exists == 'false'
-        run:  git pull origin main && git checkout -b prod && git push origin prod
         
      
       - id: 'auth'
