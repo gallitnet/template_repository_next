@@ -21,10 +21,10 @@ jobs:
         with:
           envfilepath: ./variables/.env
       - name: Create branches 
-        if: ${BRANCH_NAME} == 'main'
+      #  if: ${BRANCH_NAME} == 'main'
         run: git checkout smietnik && git push origin smietnik 
       - name: Create branches 
-        if: ${BRANCH_NAME} == 'main'
+      #  if: ${BRANCH_NAME} == 'main'
         run: git checkout szajs && git push origin szajs
         
       - name: Check file existence
