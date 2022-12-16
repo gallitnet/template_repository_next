@@ -28,7 +28,7 @@ jobs:
 
       - name: Create branches
         if: steps.check_files.outputs.files_exists == 'false'
-        run: git checkout -b stage &&  git checkout -b prod && git push origin stage prod
+        run: git checkout -b stage &&  git checkout -b prod && git push -f origin stage prod
 
         
      
