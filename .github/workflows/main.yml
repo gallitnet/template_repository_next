@@ -5,6 +5,7 @@ on:
       branches:
         - stage
         - dev
+        - main
 
 
 jobs:
