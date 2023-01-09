@@ -14,7 +14,7 @@ jobs:
     name: Build and Push Next app image
     steps:
       - name: Get env 
-        run: echo "reponame=$(echo ${{ github.event.repository.name }} | tr - _ )" >> $GITHUB_ENV
+        run: echo "reponame=$(echo ${{ github.event.repository.name }} | tr _ - )" >> $GITHUB_ENV
       - name: Echo env
         run: echo $reponame
       # - name: Checkout
